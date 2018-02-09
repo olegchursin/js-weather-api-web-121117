@@ -1,15 +1,21 @@
-function getFahrenheits(result){
-  // Your code goes here
+function getFahrenheits(result) {
+  return result.hourly_forecast.map(resultInstance => {
+    return resultInstance["temp"]["english"];
+  });
 }
 
-function getHours(result){
-  // Your code goes here
+function getHours(result) {
+  return result.hourly_forecast.map(resultInstance => {
+    return resultInstance["FCTTIME"]["hour"];
+  });
 }
 
 function generateDataSet(labels, data) {
-  // Your code goes here
+  return { labels: labels, datasets: [{ data: data }] };
 }
 
 function makeRequest(endpoint, success) {
-  // Your code goes here
+  return fetch(endpoint)
+    .then(res => res.json())
+    .then(json => success(json));
 }
